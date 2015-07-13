@@ -1,0 +1,65 @@
+//======================================//
+//===============  MAPS  ===============//
+//======================================//
+html { 
+  height: 100%; 
+  }
+
+body { 
+  height: 100%; 
+  margin: 0;
+  padding: 0;
+  }
+
+#map-canvas { 
+  height: 100%; 
+  margin: 15px;
+}
+//======================================//
+//=============== HEADER ===============//
+//======================================//
+header {
+  position: absolute;
+  z-index: 9;
+  width: 100%;
+
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+  }
+}
+//===========================================//
+//=============== BORDER BARS ===============//
+//===========================================//
+.btmbar, .lftbar, .rhtbar, .topbar {
+  position: absolute;
+  background-color: #fff;
+  z-index: 9;
+}
+.lftbar, .rhtbar {
+  height: 100%;
+  width: 15px;
+
+}
+.topbar, .btmbar {
+  width: 100%;
+  height: 15px;
+}
+.topbar {
+  top: 0;
+}
+.btmbar {
+  bottom: 0;
+}
+.lftbar {
+  left: 0;
+}
+.rhtbar {
+  right: 0;
+}
+//===========================================//
+//===============  ===============//
+//===========================================//
