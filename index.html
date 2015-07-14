@@ -11,11 +11,16 @@
     <div class="topbar"></div>
     <div class="btmbar"></div>
 		<header>
-			<h1> Neighbourhood Map </h1>
+			<input data-bind="search" placeholder="search for a location..."></input>
 		</header>
     <div id="map-canvas">
     </div>
+    <footer>
+      <h1 data-bind="city">Amsterdam</h1>
+      <h2 data-bind="country">The Netherlands</h1>
+      <h3 data-bind="cordinates">52.3667/4.9000</h3>
+    </footer>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVLn7yoOtC6zhGEquDBxRAmytmpxMMifM"></script>
-    <script src="js/app.js"></script>
     <script src="js/frameworks/knock-out/knockout-3.3.0.js"></script>
+    <script src="js/app.js"></script>
 	</body>
