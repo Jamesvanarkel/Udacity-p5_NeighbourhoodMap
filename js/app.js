@@ -1,9 +1,8 @@
 'use strict';
-
 /**
- * 
- * 
- * 
+ *    OLD SKOOL AMSTERDAM MAP
+ *    JAMES VAN ARKEL FOR UDACITY PROJECT 5
+ *    JULY 2015
  */
 var Place = function (data) {
   var self = this;
@@ -19,19 +18,20 @@ var Place = function (data) {
   self.createMarker = function () {
     self.marker = new google.maps.Marker({
       map: googleMap,
-      position: self.position
+      position: self.position,
+      icon: 'img/pin.png'
     });
   };
   
   self.addMarker = function () {
     self.marker.setMap(googleMap);
-  }
+  };
   
   self.select = function() {
-		if (appView.currentPlace() !== undefined) {
-			appView.currentPlace().closeInfowindow();
-			appView.currentPlace().selected(false);
-		}
+    if (appView.currentPlace() !== undefined) {
+      appView.currentPlace().closeInfowindow();
+      appView.currentPlace().selected(false);
+    }
   };
   self.init();
 }
@@ -41,7 +41,7 @@ var ViewModel = function () {
   var self = this;
   self.filterList = ko.observableArray();
   console.log(places())
-  
+  // Get the places out of the observable array in places.js and shoot them on the map
   self.search = function () {
     for (var i = 0, len = places().length; i < len; i++) {
       console.log(places())
@@ -60,7 +60,7 @@ var googleMap;
 function MapInit() {
   var mapOptions = {
     center: { lat: 52.3667, lng: 4.9000 },
-    zoom: 14,
+    zoom: 13,
     panControl: false,
     scaleControl: true,
     mapTypeControl: true,
