@@ -11,9 +11,17 @@
     <div class="topbar"></div>
     <div class="btmbar"></div>
 		<header>
-			<input data-bind="search" placeholder="search for a location..."></input>
+			<input data-bind="" type="search" placeholder="search for a location..."></input>
 		</header>
     <div id="map-canvas">
+    </div>
+    <div class="list-view">
+    <h3>List of Places</h3>
+      <div>
+        <ul data-bind="foreach: filterList">
+          <li data-bind="text: name"></li>
+        </ul>
+      </div>
     </div>
     <footer>
       <h1 data-bind="city">Amsterdam</h1>
@@ -23,4 +31,6 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVLn7yoOtC6zhGEquDBxRAmytmpxMMifM"></script>
     <script src="js/frameworks/knock-out/knockout-3.3.0.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/places.js"></script>
+    <script src="js/style.js"></script>
 	</body>

@@ -1,23 +1,65 @@
-var markers = [
-  {
-    title: 'testing',
-    position: { lat: 52.3667, lng: 4.9000 }
-  },
-  {
-    title: 'testing',
-    position: { lat: 52.3667, lng: 4.9000 }
+'use strict';
+
+/**
+ * 
+ * 
+ * 
+ */
+var Place = function (data) {
+  var self = this;
+  self.name = data.name;
+  self.position = data.latLng;
+  self.marker = '';
+  self.selected = ko.observable(false);
+
+  self.init = function () {
+    self.createMarker();
+  };
+  
+  self.createMarker = function () {
+    self.marker = new google.maps.Marker({
+      map: googleMap,
+      position: self.position
+    });
+  };
+  
+  self.addMarker = function () {
+    self.marker.setMap(googleMap);
   }
-]
-var Map = function (data) {
   
-  this.lat = ko.observalble(data.position.lat);
-  this.lng = ko.observalble(data.position.lng);
-  this.title = ko.observabable(data.title);
-  
+  self.select = function() {
+		if (appView.currentPlace() !== undefined) {
+			appView.currentPlace().closeInfowindow();
+			appView.currentPlace().selected(false);
+		}
+  };
+  self.init();
 }
-function init() {
+
+
+var ViewModel = function () {
+  var self = this;
+  self.filterList = ko.observableArray();
+  console.log(places())
+  
+  self.search = function () {
+    for (var i = 0, len = places().length; i < len; i++) {
+      console.log(places())
+        places()[i].addMarker();
+        self.filterList.push(places()[i]);
+    }
+  }
+  self.init = function () {
+    MapInit();
+    self.search();
+  };
+};
+  
+// Initialize Google Map
+var googleMap;
+function MapInit() {
   var mapOptions = {
-    center: { lat: 52.3667, lng: 4.9000},
+    center: { lat: 52.3667, lng: 4.9000 },
     zoom: 14,
     panControl: false,
     scaleControl: true,
@@ -33,87 +75,18 @@ function init() {
       style: google.maps.ZoomControlStyle.SMALL
     }
   };
-  var styles = [
-    {
-      "featureType": "administrative",
-      "stylers": [
-        { "visibility": "off" }
-      ]
-    },{
-      "featureType": "landscape",
-      "stylers": [
-        { "color": "#ffffff" }
-      ]
-    },{
-      "featureType": "poi",
-      "stylers": [
-        { "visibility": "off" }
-      ]
-    },{
-      "featureType": "road",
-      "stylers": [
-        { "color": "#000000" },
-        { "visibility": "simplified" },
-        { "weight": 0.4 }
-      ]
-    },{
-      "featureType": "transit",
-      "stylers": [
-        { "visibility": "simplified" }
-      ]
-    },{
-      "featureType": "water",
-      "stylers": [
-        { "visibility": "simplified" },
-        { "color": "#eeeeee" }
-      ]
-    },{
-      "elementType": "labels.icon",
-      "stylers": [
-        { "visibility": "on" }
-      ]
-    },{
-      "featureType": "road.local",
-      "elementType": "geometry",
-      "stylers": [
-        { "visibility": "on" },
-        { "weight": 0.1 },
-        { "color": "#000000" }
-      ]
-    },{
-      "featureType": "road.highway.controlled_access",
-      "elementType": "geometry.fill",
-      "stylers": [
-        { "color": "#808080" },
-        { "weight": 0.1 }
-      ]
-    },{
-    },{
-      "elementType": "labels",
-      "stylers": [
-        { "visibility": "off" }
-      ]
-    },{
-    }
-  ]
-
-
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
+  googleMap = new google.maps.Map(document.getElementById('map-canvas'),
     mapOptions);
-    map.setOptions({styles: styles});
-  var marker = new google.maps.Marker({
-    position: { lat: 52.3667, lng: 4.9000 },
-    map: map,
-    title: 'testing',
-    animation: google.maps.Animation.DROP
-  })
-}
+  // grab the styles out of the style.js to make the map awesome.
+  googleMap.setOptions({ styles: styles });
+};
 
-google.maps.event.addDomListener(window, 'load', init);
+// 1...2..3..GO!
+var appView;
+document.addEventListener("DOMContentLoaded", function (event) { 
 
-var ViewModel = function () {
-  var self = this;
-  
-}
+  appView = new ViewModel();
+  ko.applyBindings(appView);
+  appView.init();
 
-ko.applyBindings(new ViewModel());
+});
