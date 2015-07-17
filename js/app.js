@@ -1,8 +1,8 @@
 'use strict';
 /**
- *    OLD SKOOL AMSTERDAM MAP
- *    JAMES VAN ARKEL FOR UDACITY PROJECT 5
- *    JULY 2015
+ *    @TITLE: OLD SKOOL AMSTERDAM MAP
+ *    @AUTHOR: JAMES VAN ARKEL FOR UDACITY PROJECT 5
+ *    @DATE: JULY 2015
  */
 var Place = function (data) {
   var self = this;
@@ -19,6 +19,7 @@ var Place = function (data) {
     self.marker = new google.maps.Marker({
       map: googleMap,
       position: self.position,
+      animation: google.maps.Animation.DROP, 
       icon: 'img/pin.png'
     });
   };
@@ -26,7 +27,10 @@ var Place = function (data) {
   self.addMarker = function () {
     self.marker.setMap(googleMap);
   };
-  
+
+  self.removeMarker = function() {
+    self.marker.setMap(null);
+  };
   self.select = function() {
     if (appView.currentPlace() !== undefined) {
       appView.currentPlace().closeInfowindow();
@@ -40,18 +44,33 @@ var Place = function (data) {
 var ViewModel = function () {
   var self = this;
   self.filterList = ko.observableArray();
-  console.log(places())
+	self.filterText = ko.observable();
+  console.log(places());
+
   // Get the places out of the observable array in places.js and shoot them on the map
-  self.search = function () {
+  self.search = function (data) {
+    var filter = data();
+    self.filterList.removeAll();
+    self.removeMarkerAll();
+    
+    if (!filter) { filter = "";}
     for (var i = 0, len = places().length; i < len; i++) {
-      console.log(places())
-        places()[i].addMarker();
+      if(places()[i].name.toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
+        places()[i].addMarker();  
         self.filterList.push(places()[i]);
+      }
     }
   }
+  self.removeMarkerAll = function () {
+      
+    for (var i = 0; i < places().length; i++) {
+      places()[i].removeMarker();
+    }
+  
+	};
   self.init = function () {
     MapInit();
-    self.search();
+    self.search(self.filterText);
   };
 };
   

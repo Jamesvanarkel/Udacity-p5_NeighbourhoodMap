@@ -11,15 +11,15 @@
     <div class="topbar"></div>
     <div class="btmbar"></div>
 		<header>
-			<input data-bind="" type="search" placeholder="search for a location..."></input>
+			<input type="search" data-bind="value: filterText, valueUpdate: 'input', event: {input: search(filterText)}" placeholder="search for a location..."></input>
 		</header>
     <div id="map-canvas">
     </div>
     <div class="list-view">
     <h3>List of Places</h3>
       <div>
-        <ul data-bind="foreach: filterList">
-          <li data-bind="text: name"></li>
+        <ul data-bind="foreach: filterList ">
+          <li data-bind="text: name, click: select, css: { selected: selected() == true}"></li>
         </ul>
       </div>
     </div>
