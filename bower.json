@@ -1,0 +1,13 @@
+{
+  "name": "Udacity-P5_neigbourhood-map",
+  "version": "0.0.1",
+  "authors": [
+    "James van Arkel <j.van.arkel@brickparking.com>"
+  ],
+  "description": "A interactive google map Neighbourhood map of Amsterdam and the places I know and go on the regular",
+  "main": "index.html",
+  "license": "MIT",
+  "dependencies": {
+    "knockout": "~3.3.0"
+  }
+}

@@ -14,37 +14,37 @@ var Place = function (data) {
   self.init = function () {
     self.createMarker();
   };
-  
+
   self.createMarker = function () {
     self.marker = new google.maps.Marker({
       map: googleMap,
       position: self.position,
-      animation: google.maps.Animation.DROP, 
+      animation: google.maps.Animation.DROP,
       icon: 'img/pin.png'
     });
   };
-  
+
   self.addMarker = function () {
     self.marker.setMap(googleMap);
   };
 
-  self.removeMarker = function() {
+  self.removeMarker = function () {
     self.marker.setMap(null);
   };
-  self.select = function() {
-    if (appView.currentPlace() !== undefined) {
-      appView.currentPlace().closeInfowindow();
-      appView.currentPlace().selected(false);
+  self.select = function () {
+    if (appView !== undefined) {
+      appView.closeInfowindow();
+      appView.selected(false);
     }
   };
   self.init();
-}
+};
 
 
 var ViewModel = function () {
   var self = this;
   self.filterList = ko.observableArray();
-	self.filterText = ko.observable();
+  self.filterText = ko.observable();
   console.log(places());
 
   // Get the places out of the observable array in places.js and shoot them on the map
