@@ -8,6 +8,10 @@
   "main": "index.html",
   "license": "MIT",
   "dependencies": {
-    "knockout": "~3.3.0"
+    "skeleton": "~2.0.4",
+    "normalize.css": "~3.0.3",
+    "knockout": "~3.3.0",
+    "jquery": "~2.1.4",
+    "offlinejs-simulate-ui": "~0.1.2"
   }
 }

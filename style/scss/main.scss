@@ -1,3 +1,4 @@
+$break-phone: 550px;
 //======================================//
 //===============  MAPS  ===============//
 //======================================//
@@ -30,14 +31,14 @@ header {
   width: 100%;
   display: inline-flex;
 
-  input {
+  #search {
     background-color: white;
     width: 80%;
     padding:  15px 20px;
     border: 4px black solid;
     margin-left: auto;
     margin-right: auto;
-    font-size: 16px;
+    font-size: 1em;
     font-weight: 200;
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 3px;
@@ -77,8 +78,8 @@ header {
 //===========================================//
 //=============== FOOTER ===============//
 //===========================================//
-footer {
-  height: 10%;
+#main-place {
+  
   float: left;
   position: fixed;
   left: 0;
@@ -89,6 +90,7 @@ footer {
   border: 4px solid black;
   line-height: 0.8;
   padding: 10px;
+  font-size: 1em;
   padding-right: 60px;
 
   
@@ -105,7 +107,7 @@ footer {
     margin-left: 10px;
     color: black;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.7em;
+    font-size: 0.9em;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 200;
@@ -114,7 +116,7 @@ footer {
      margin-left: 10px;
     color: #aaa;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.6em;
+    font-size: 0.8em;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 100; 
@@ -123,7 +125,7 @@ footer {
 //===========================================//
 //=============== ListView ===============//
 //===========================================//
-.list-view {
+#list-view {
   position: absolute;
   bottom:15px;
   right: 0;
@@ -134,7 +136,7 @@ footer {
   line-height: 1;
   padding: 10px;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.7;
+  font-size: 0.7em;
   text-transform: uppercase;
   
   h3 {
@@ -159,6 +161,36 @@ footer {
     letter-spacing: 2px;
     font-weight: 200;
     list-style: none;
+    }
+  }
+}
+.row:last-child {
+  position: absolute;
+  bottom: 0;
+}
+@media only screen and (max-width: $break-phone) {
+  #search{
+    width: 100%;
+  }
+  #list-view {
+    padding: 0px;
+    text-align: center;
+    width: auto;
+    bottom:114px;
+    left: 15px;
+    
+    h3 {
+      font-weight: bold;
+      font-size: 1.3em;
+      text-align: center;
+    }
+  }
+  #main-place {
+    padding:0px;
+    text-align: center;
+    margin: 0px;
+    h1{
+      text-align: center;
     }
   }
 }

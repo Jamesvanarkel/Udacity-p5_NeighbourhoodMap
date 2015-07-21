@@ -5,38 +5,69 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Neigbourhood Map Udacity p5</title>
-		<link rel="stylesheet" href="style/css/style.css">
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css" />
+    <link rel="stylesheet" href="bower_components/normalize.css/normalize.css" />
+    <link rel="stylesheet" href="style/css/offline-theme-dark.css" />
     <!-- endbower -->
-	</head>
-	<body>
+    <link rel="stylesheet" href="style/css/style.css">
+  </head>
+  
+  <body>
     <div class="lftbar"></div>
     <div class="rhtbar"></div>
     <div class="topbar"></div>
     <div class="btmbar"></div>
-		<header>
-			<input type="search" data-bind="value: filterText, valueUpdate: 'input', event: {input: search(filterText)}" placeholder="search for a location..."></input>
+		<header class="row">
+			<input class ="ten columns" id="search" type="search" data-bind="value: filterText, valueUpdate: 'input', event: {input: search(filterText)}" placeholder="search for a location..."></input>
 		</header>
     <div id="map-canvas">
+    
     </div>
-    <div class="list-view">
-    <h3>List of Places</h3>
-      <div>
-        <ul data-bind="foreach: filterList ">
-          <li data-bind="text: name, click: select, css: { selected: selected() == true}"></li>
-        </ul>
+    <div class="row bottom">
+      <div class="four columns" id="list-view">
+      <h3>List of Places</h3>
+        <div>
+          <ul data-bind="foreach: filterList ">
+            <li data-bind="text: name, click: select, css: { selected: selected() == true}"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="four columns" id="main-place">
+        <h1 data-bind="city">Amsterdam</h1>
+        <h2 data-bind="country">The Netherlands</h1>
+        <h3 data-bind="cordinates">52.3667/4.9000</h3>
       </div>
     </div>
-    <footer>
-      <h1 data-bind="city">Amsterdam</h1>
-      <h2 data-bind="country">The Netherlands</h1>
-      <h3 data-bind="cordinates">52.3667/4.9000</h3>
-    </footer>
     <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/knockout/dist/knockout.js"></script>
+    <script src="bower_components/offline/offline.js"></script>
+    <script src="bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js"></script>
     <!-- endbower -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVLn7yoOtC6zhGEquDBxRAmytmpxMMifM"></script>
     <script src="js/app.js"></script>
     <script src="js/places.js"></script>
     <script src="js/style.js"></script>
-	</body>
+    <script>
+        $(function(){
+    
+            var 
+                $online = $('.online'),
+                $offline = $('.offline');
+    
+            Offline.on('confirmed-down', function () {
+                $online.fadeOut(function () {
+                    $offline.fadeIn();
+                });
+            });
+    
+            Offline.on('confirmed-up', function () {
+                $offline.fadeOut(function () {
+                    $online.fadeIn();
+                });
+            });
+    
+        });
+    </script>
+  </body>

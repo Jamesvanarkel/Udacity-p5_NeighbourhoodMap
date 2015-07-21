@@ -6,6 +6,5 @@
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-less-imports": "^1.1.0",
     "grunt-wiredep": "^2.0.0",
-    "install": "^0.1.8"
   }
 }
