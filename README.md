@@ -7,11 +7,17 @@ To get started and see it work you can open the index.html file in the browser. 
 
 
 ##DEVELOPMENT
-To get the sass compiler started use following code in terminal
+To get the build running your changes open the root folder in the console and add the following command. Don't forget to refresh the browser when changing stuff. 
 ```
-sass --watch style/scss/main.scss:style/css/style.css
+grunt watch
 
 ```
+What does this command do?
+
+1. it checks if there are any changes in the sass files
+2. if there are changes then it will compile to css
+3. Check for changes in the css, if so minify in the public folder
+4. check if there are any changes in the .js files in the assets folder, if so minify and bundle the files in the right order. 
 #Installing modules
 Use bower to install modules or node
 ```
@@ -24,4 +30,5 @@ run:
 ```
 grunt wiredep
 ```
+
 

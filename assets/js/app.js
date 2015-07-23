@@ -10,11 +10,11 @@ var Place = function (data) {
   self.position = data.latLng;
   self.marker = '';
   self.selected = ko.observable(false);
-
+  //Init on place object
   self.init = function () {
     self.createMarker();
   };
-
+  //Put the marker on its place
   self.createMarker = function () {
     self.marker = new google.maps.Marker({
       map: googleMap,
@@ -23,18 +23,21 @@ var Place = function (data) {
       icon: 'public/img/pin.png'
     });
   };
-
+  //Add the marker to the map
   self.addMarker = function () {
     self.marker.setMap(googleMap);
   };
-
+  //Delete the marker 
   self.removeMarker = function () {
     self.marker.setMap(null);
   };
+  //Select the marker
   self.select = function () {
+          console.log("selected")
     if (appView !== undefined) {
       appView.closeInfowindow();
       appView.selected(false);
+
     }
   };
   self.init();

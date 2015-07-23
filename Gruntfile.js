@@ -1,6 +1,5 @@
 module.exports = function (grunt) {
   'use-strict';
-  require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);  
   grunt.initConfig({
     wiredep: {
       app: {
@@ -14,25 +13,18 @@ module.exports = function (grunt) {
       ]
     },
     watch: {
-      bower: {
-        files: ['bower_components/*'],
-        tasks: ['wiredep']
-      },
-      cssmin: {
+      scripts: {
         files: [
-          'assets/style/css/style.css',
-          'assets/style/css/offline-theme-dark.css'
+          'assets/style/css/*.css',
+          'assets/js/*.js',
+          'assets/style/scss/*.scss'
         ],
-        task: ['cssmin']
+        tasks: ['default'],
+        options: {
+          spawn:false,
+          event:['all']
+        },
       },
-      uglify: {
-        files: [
-          'assets/js/app.js',
-          'assets/js/places.js',
-          'assets/js/style.js'
-        ],
-        task: ['uglify']
-      }
     },
     cssmin: {  
       sitecss: {  
@@ -59,16 +51,25 @@ module.exports = function (grunt) {
         ],  
         dest: 'public/js/applib.min.js'  
       }  
-    }    
+    },
+    sass: {
+      dist: {
+        files: {
+        'assets/style/css/style.css': 'assets/style/scss/main.scss'
+        }
+      }
+    }
   });
-  
-  // Default task.  
-  grunt.registerTask('default', ['uglify', 'cssmin']);  
+ 
   //Load local tasks
   grunt.loadNpmTasks('grunt-wiredep');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.registerTask('changes', ['watch']);
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+
+  grunt.registerTask('default', ['sass', 'cssmin', 'uglify']);
+
 
 };
