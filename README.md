@@ -4,8 +4,7 @@ For the Udacity Project 5 we needed to make a Google map based full screen neigb
 
 ##FIRE UP THE PUPPY
 To get started and see it work you can open the index.html file in the browser. Thats it!
-
-
+Or see it live on http://neighbourhood.jamesvanarkel.nl/
 ##DEVELOPMENT
 To get the build running your changes open the root folder in the console and add the following command. Don't forget to refresh the browser when changing stuff. 
 ```
