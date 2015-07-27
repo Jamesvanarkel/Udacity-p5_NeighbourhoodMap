@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Neigbourhood Map Udacity p5</title>
+    <title>Neigbourhood Map Udacity p5</title>
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/skeleton/css/skeleton.css" />
     <link rel="stylesheet" href="bower_components/normalize.css/normalize.css" />
@@ -17,11 +17,10 @@
     <div class="rhtbar"></div>
     <div class="topbar"></div>
     <div class="btmbar"></div>
-		<header class="row">
-			<input class ="ten columns" id="search" type="search" data-bind="value: filterText, valueUpdate: 'input', event: {input: search(filterText)}" placeholder="search for a location..."></input>
-		</header>
+    <header class="row">
+      <input class ="ten columns" id="search" type="search" data-bind="value: filterText, valueUpdate: 'input', event: {input: search(filterText)}" placeholder="search for a location...">
+    </header>
     <div id="map-canvas">
-    
     </div>
     <div class="row bottom">
       <div class="four columns" id="list-view">
@@ -34,7 +33,7 @@
       </div>
       <div class="four columns" id="main-place">
         <h1 data-bind="text: city"></h1>
-        <h2 data-bind="text: country"></h1>
+        <h2 data-bind="text: country"></h2>
         <h3 data-bind="text: cordinates"></h3>
       </div>
     </div>
@@ -67,3 +66,4 @@
         });
     </script>
   </body>
+</html>

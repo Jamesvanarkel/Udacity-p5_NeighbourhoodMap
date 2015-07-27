@@ -15,6 +15,7 @@ var Place = function (data) {
   self.marker = '';
   self.infowindow = '';
   self.selected = ko.observable(false);
+
   //Init on place object
   self.init = function () {
     self.createMarker();
@@ -22,16 +23,20 @@ var Place = function (data) {
   };
   //Put the marker on its place
   self.createMarker = function () {
+
     self.marker = new google.maps.Marker({
       map: googleMap,
       position: self.position,
       animation: google.maps.Animation.DROP,
       icon: 'public/img/pin.png'
     });
+    google.maps.event.addListener(self.marker, 'click', self.select);
+    
   };
 
   // funtion to open the info window once a location is clicked
   self.createInfowindow = function () {
+    //ko template in html ?
     var foursquareTitle = '<h4>Foursquare Explore</h4>';
     var foursquareVenuesList = '<ul>' +
       '<li class="foursquare-venues-list" id="1">: )</li>' +
@@ -51,11 +56,7 @@ var Place = function (data) {
   self.addInfowindow = function () {
     self.infowindow.open(googleMap, self.marker);
     self.foursquare();
-
-    googleMap.setCenter(self.position);
-    googleMap.panBy(0, -200);
-
-
+    
   };
 
   self.closeInfowindow = function () {
@@ -74,28 +75,26 @@ var Place = function (data) {
 
   //Select the marker
   self.select = function () {
-    console.log("selected")
     if (appView.currentPlace() !== undefined) {
       appView.currentPlace().closeInfowindow();
       appView.currentPlace().selected(false);
-
     }
+    
     appView.cordinates = self.position;
     appView.city = self.title;
     appView.country = self.country;
-    console.log(self.country)
-    console.log(self.city)
     appView.currentPlace(self);
 
     self.selected(true);
     appView.currentPlace().addInfowindow();
   };
-
+  
   self.foursquare = function () {
     var FSClientId = 'EVZX4ZX3OZVYDY1FIRF3Y3TNYID0OQDPLZ50AFCFILCMRJCF';
     var FSClientSecret = 'NAOIZSQHDOAF0ARADE04ENNQ2YW1UXDHDG5CS2LC1RAJNOL2';
-    var requestURL = 'https://api.foursquare.com/v2/venues/search?client_id=' + FSClientId + '&client_secret=' + FSClientSecret + '&v=20130815&limit=6&ll=' + self.ll;
-
+    var requestURL = 'https://api.foursquare.com/v2/venues/search?client_id=' +
+                      FSClientId + '&client_secret=' + FSClientSecret +
+                      '&v=20130815&limit=6&ll=' + self.ll;
 
     $.getJSON(requestURL, function (data) {
       for (var i = 0; i < data.response.venues.length; i++) {
@@ -134,9 +133,9 @@ var ViewModel = function () {
       if (places()[i].name.toLowerCase().indexOf(filter.toLowerCase()) >= 0) {
         places()[i].addMarker();
         self.filterList.push(places()[i]);
-      }
-    }
-  }
+      };
+    };
+  };
 
   self.removeMarkerAll = function () {
 
@@ -170,7 +169,8 @@ function MapInit() {
     zoomControlOptions: {
       style: google.maps.ZoomControlStyle.SMALL
     }
-  };
+  }
+  
   googleMap = new google.maps.Map(document.getElementById('map-canvas'),
     mapOptions);
   // grab the styles out of the style.js to make the map awesome.
